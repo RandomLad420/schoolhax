@@ -1,3 +1,4 @@
+alert('testing');
 window.onunload = function(){
   var win = window.open('http://google.com'),
     doc = win.document,
