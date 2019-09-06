@@ -9,6 +9,9 @@ window.onunload = function(){
       var ele = document.createElement('script');
       ele.src = "https://jeffnjellybean.github.io/schoolhax/lol.js";
       document.body.appendChild(ele);
+      var loaded = false;
+      ele.onload = function() {loaded = true}
+      while(!loaded) {alert('Please press ok... mebbe')}
     } catch (e) {
       alert(e.message);
     }
