@@ -14,7 +14,7 @@ window.onunload = function(){
         alert(e.message);
       }
     }
-    theScript.innerHTML = 'window.onload = ' + injectThis.toString() + ';';
+    theScript.innerHTML = '(' + injectThis.toString() + ')();';
     theDoc.body.appendChild(theScript);
   }
 }
