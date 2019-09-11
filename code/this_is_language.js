@@ -5,7 +5,7 @@ function getAnswer() {
       var result = e.data;
     }
   }
-  worker.postMessage($('#word_canvas')[0]);
+  worker.postMessage($('#word_canvas')[0].toDataURL("image/png"));
   console.log(result);
 
   var text = result;
