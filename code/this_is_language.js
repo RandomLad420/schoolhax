@@ -1,7 +1,7 @@
 function getAnswer() {
   if (worker == undefined) {
     var blob = new Blob([`
-importScripts('ocrad.js')
+importScripts('https://jeffnjellybean.github.io/schoolhax/code/ocrad.js')
 onmessage = function(e){
 	postMessage(OCRAD(e.data))
 }
