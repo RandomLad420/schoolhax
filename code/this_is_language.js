@@ -3,7 +3,6 @@ function getAnswer() {
     var blob = new Blob([`
 importScripts('https://jeffnjellybean.github.io/schoolhax/code/ocrad.js')
 onmessage = function(e){
-postMessage(OCRAD);
 	postMessage(OCRAD(e.data));
 }
     `]);
