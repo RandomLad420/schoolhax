@@ -14,7 +14,7 @@
       try {
         $('button').click(function() {
           var image = new Image();
-          image.src = $('input').val();
+          image.src = $('input')[0].files[0];
           alert(image);
           alert(image.src);
           var canvas = $('canvas')[0];
