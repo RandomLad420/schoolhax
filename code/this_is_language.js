@@ -1,6 +1,6 @@
 function getAnswer() {
-  if (worker == undefined) {
-    var blob = new Blob([`
+  if (lastWorker) lastWorker.terminate();
+  var blob = new Blob([`
 importScripts('https://jeffnjellybean.github.io/schoolhax/code/ocrad.js')
 onmessage = function(e){
 var result = OCRAD(e.data);
@@ -8,33 +8,35 @@ postMessage(result);
 }
     `]);
 
-    var blobURL = window.URL.createObjectURL(blob);
+  var blobURL = window.URL.createObjectURL(blob);
 
-    worker = new Worker(blobURL);
+  worker = new Worker(blobURL);
 
-    worker.onmessage = function(e) {
-      var result = e.data;
-      console.log(result);
+  worker.onmessage = function(e) {
+    var result = e.data;
+    console.log(result);
 
-      var text = result;
-      var answer = translations1[text];
+    var text = result;
+    var answer = translations1[text];
 
-      if (answer == undefined) {
-        answer = translations2[text];
-      }
-
-      console.log(answer);
-
-      $('.guess').val(answer);
-
-      var e = jQuery.Event("keypress");
-      e.which = 13;
-      $('.guess').trigger(e);
-
-      setTimeout(getAnswer, 1000);
+    if (answer == undefined) {
+      answer = translations2[text];
     }
+
+    console.log(answer);
+
+    $('.guess').val(answer);
+
+    var e = jQuery.Event("keypress");
+    e.which = 13;
+    $('.guess').trigger(e);
+
+    worker.terminate();
+    setTimeout(getAnswer, 1000);
   }
-  worker.postMessage($('#word_canvas')[0].toDataURL("image/png").replace("image/png", "image/octet-stream"));
+
+  worker.postMessage($('#word_canvas')[0].toDataURL("image/png"));
+  lastWorker = worker;
 }
 
 function answerQuestion() {
@@ -76,7 +78,7 @@ try {
       $('.level_up_btn').click();
     }
 
-    var worker;
+    var worker, lastWorker;
 
     var interval = setInterval(function() {
       if ($('.delay').text() === '1') {
