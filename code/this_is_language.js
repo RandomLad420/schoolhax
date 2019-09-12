@@ -3,7 +3,10 @@ function getAnswer() {
     if(worker == undefined) {
       worker = new Tesseract.TesseractWorker();
     }
-    worker.recognize($('#word_canvas')[0].toDataURL('image/png'), 'eng').then(function(result) {
+    worker.recognize($('#word_canvas')[0].toDataURL('image/png'), 'eng', {
+      'tessedit_ocr_engine_mode': OEM.TESSERACT_ONLY,
+      'tessedit_char_whitelist': 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',
+    }).then(function(result) {
       alert(result.text);
 
       var text = result.text.substring(0, result.text.indexOf("\n"));
