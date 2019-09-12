@@ -30,10 +30,10 @@ onmessage = function(e){
       e.which = 13;
       $('.guess').trigger(e);
 
-      setTimeout(getAnswer, 500);
-    };
+      setTimeout(getAnswer, 1000);
+    }
   }
-  worker.postMessage($('#word_canvas')[0].toDataURL('image/png'));
+  worker.postMessage(document.querySelector('#word_canvas').toDataURL("image/png"));
 }
 
 function answerQuestion() {
