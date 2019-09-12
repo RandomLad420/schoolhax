@@ -1,19 +1,20 @@
 function getAnswer() {
   try {
-      var text = OCRAD($('#word_canvas')[0]);
-      var answer = translations1[text];
+    var text = OCRAD($('#word_canvas')[0]);
+    console.log(text);
+    var answer = translations1[text];
 
-      if (answer == undefined) {
-        answer = translations2[text];
-      }
+    if (answer == undefined) {
+      answer = translations2[text];
+    }
+    console.log(answer);
+    $('.guess').val(answer);
 
-      $('.guess').val(answer);
+    var event = jQuery.Event('keypress');
+    event.which = 13;
+    $('.guess').trigger(event);
 
-      var event = jQuery.Event('keypress');
-      event.which = 13;
-      $('.guess').trigger(event);
-      
-      getAnswer();
+    setTimeout(getAnswer, 1000);
   } catch (e) {
     alert(e.message);
   }
