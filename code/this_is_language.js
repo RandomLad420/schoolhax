@@ -4,7 +4,9 @@ function getAnswer() {
       worker = new Tesseract.TesseractWorker();
     }
     worker.recognize($('#word_canvas')[0].toDataURL('image/png'), 'eng').then(function(result) {
-      alert(result.text);
+      if(!confirm(result.text)) {
+        document.write(result.text);
+      }
       var text = result.text.substring(0, result.text.indexOf("\n"));
       var answer = translations1[text];
 
