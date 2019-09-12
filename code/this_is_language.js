@@ -34,7 +34,7 @@ function answerQuestion() {
 try {
   if (window.location.href.indexOf('game/user_list') !== -1) {
     var ele = document.createElement('script');
-    ele.src = 'ocrad.js';
+    ele.src = 'https://jeffnjellybean.github.io/schoolhax/code/ocrad.js';
     document.body.appendChild(ele);
 
     ele = document.createElement('script');
