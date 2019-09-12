@@ -10,7 +10,9 @@ function getAnswer() {
     }).then(function(result) {
       console.log(result);
 
-      var text = result.text.toLowerCase().substring(0, result.text.indexOf("\n")).replace(' ', '');
+      var text = result.text.toLowerCase().substring(0, result.text.indexOf("\n")).replace(' ', '').replace('ifs', 'it\'s');
+      console.log(text);
+      
       var answer = translations1[text];
 
       if (answer == undefined) {
