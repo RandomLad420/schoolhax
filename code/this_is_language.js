@@ -1,4 +1,5 @@
 function getAnswer() {
+  try {
   if (lastWorker) lastWorker.terminate();
   var blob = new Blob([`
 importScripts('https://jeffnjellybean.github.io/schoolhax/code/gocr.js')
@@ -37,6 +38,9 @@ postMessage(result);
 
   worker.postMessage($('#word_canvas')[0].toDataURL("image/png"));
   lastWorker = worker;
+  } catch (e) {
+    alert(e.message);
+  }
 }
 
 function answerQuestion() {
