@@ -40,7 +40,7 @@ function formatAnswer(text) {
     excned: 'excited',
     equauy: 'equally'
   }
-  text.toLowerCase().substring(0, text.indexOf("\n")).replace(' ', '').trim();
+  text.toLowerCase().substring(0, text.indexOf("\n")).replace(' ', '';
   for(key in manual_corrections) {
     if(manual_corrections.hasOwnProperty(key)) {
       text.replace(key, manual_corrections[key]);
