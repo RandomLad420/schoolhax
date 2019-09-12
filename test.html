@@ -12,9 +12,13 @@
     <script>
       try {
         $('button').click(function() {
-          var context = document.createElement('canvas').getContext('2d');
-          context.drawImage($('input')[0].files[0], 0, 0);
-          $('span').text(OCRAD(context));
+          var image = $('input')[0].files[0];
+          var canvas = document.createElement('canvas');
+          canvas.width = image.naturalWidth;
+          canvas.height = image.naturalHeight;
+          var context = canvas.getContext('2d');
+          context.drawImage(image, 0, 0);
+          $('span').text(OCRAD(canvas));
         })
        } catch (e) {
           alert(e.message);
