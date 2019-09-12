@@ -8,16 +8,13 @@
     <button>enter</button>
     <span></span>
     <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script src="code/ocrad.js"></script>
     <script>
       try {
-        var worker = new Worker('code/ocrad_worker.js');
-        worker.onmessage = function(e) {
-          $('span').text(e.data);
-        }
         $('button').click(function() {
           var context = document.createElement('canvas').getContext('2d');
           context.drawImage($('input')[0].files[0], 0, 0);
-          worker.postMessage(context);
+          $('span').text(OCRAD(context));
         })
        } catch (e) {
           alert(e.message);
