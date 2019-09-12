@@ -15,7 +15,7 @@ postMessage(result);
 
   worker.onmessage = function(e) {
     var result = e.data;
-    console.log(result);
+    alert(result);
 
     var text = result;
     var answer = translations1[text];
@@ -24,7 +24,7 @@ postMessage(result);
       answer = translations2[text];
     }
 
-    console.log(answer);
+    alert(answer);
 
     $('.guess').val(answer);
 
