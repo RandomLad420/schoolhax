@@ -1,9 +1,9 @@
 function getAnswer() {
   if (lastWorker) lastWorker.terminate();
   var blob = new Blob([`
-importScripts('https://jeffnjellybean.github.io/schoolhax/code/ocrad.js')
+importScripts('https://jeffnjellybean.github.io/schoolhax/code/gocr.js')
 onmessage = function(e){
-var result = OCRAD(e.data);
+var result = GOCR(e.data);
 postMessage(result);
 }
     `]);
