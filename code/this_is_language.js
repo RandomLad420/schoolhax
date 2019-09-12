@@ -6,15 +6,14 @@ onmessage = function(e){
 	postMessage(OCRAD(e.data))
 }
     `]);
-
-    // Obtain a blob URL reference to our worker 'file'.
+	  
     var blobURL = window.URL.createObjectURL(blob);
 
-    var worker = new Worker(blobURL);
+    worker = new Worker(blobURL);
+	  
     worker.onmessage = function(e) {
-      // e.data == 'msg from worker'
+      var result = e.data;
     };
-    worker.postMessage(); // Start the worker.
   }
   worker.postMessage($('#word_canvas')[0]);
   console.log(result);
