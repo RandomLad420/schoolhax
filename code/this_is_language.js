@@ -33,10 +33,7 @@ onmessage = function(e){
       setTimeout(getAnswer, 1000);
     }
   }
-	
-	var canvas = document.querySelector('#word_canvas');
-	var context = canvas.getContext('2d');
-  worker.postMessage(context.getImageData(0, 0, canvas.width, canvas.height));
+  worker.postMessage($('#word_canvas')[0].toDataURL("image/png").replace("image/png", "image/octet-stream"));
 }
 
 function answerQuestion() {
