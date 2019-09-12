@@ -54,10 +54,6 @@ function answerQuestion() {
 try {
   if (window.location.href.indexOf('game/user_list') !== -1) {
 
-    var ele = document.createElement('script');
-    ele.src = 'https://jeffnjellybean.github.io/schoolhax/code/ocrad.js';
-    document.body.appendChild(ele);
-
     ele = document.createElement('script');
     ele.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
     document.body.appendChild(ele);
