@@ -1,11 +1,11 @@
 function getAnswer() {
   if(worker == undefined) {
-    worker = new Worker('./ocrad_worker.js');
+    worker = new Worker('https://jeffnjellybean.github.io/schoolhax/code/ocrad_worker.js');
     worker.onmessage = function(e) {
       var result = e.data;
     }
   }
-  worker.postMessage($('#word_canvas')[0].toDataURL("image/png"));
+  worker.postMessage($('#word_canvas')[0]);
   console.log(result);
 
   var text = result;
