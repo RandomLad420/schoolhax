@@ -6,11 +6,11 @@ function getAnswer() {
     
     worker.recognize($('#word_canvas')[0].toDataURL('image/png'), 'eng', {
       'tessedit_ocr_engine_mode': Tesseract.OEM.TESSERACT_ONLY,
-      'tessedit_char_whitelist': 'Iabcdefghijklmnopqrstuvwxyz',
+      'tessedit_char_whitelist': 'Iabcdefghijklmnopqrstuvwxyz-',
     }).then(function(result) {
       console.log(result);
 
-      var text = result.text.toLowerCase().substring(0, result.text.indexOf("\n")).replace(' ', '').replace('ifs', 'it\'s');
+      var text = result.text.toLowerCase().substring(0, result.text.indexOf("\n")).replace(' ', '').replace('ifs', 'it\'s').replace('excned', 'excited');
       console.log(text);
       
       var answer = translations1[text];
