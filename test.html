@@ -15,7 +15,9 @@
           $('span').text(e.data);
         }
         $('button').click(function() {
-          worker.postMessage($('input')[0].files[0]);
+          var context = document.createElement('canvas').getContext('2d');
+          context.drawImage($('input')[0].files[0], 0, 0);
+          worker.postMessage(context);
         })
        } catch (e) {
           alert(e.message);
