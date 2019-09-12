@@ -62,8 +62,8 @@ try {
 
     for (var i = 0; i < tables.length; i++) {
       var childs = tables[i].children;
-      translations1[childs[0].innerText.replace(' ', '')] = childs[1].innerText;
-      translations2[childs[1].innerText.replace(' ', '')] = childs[0].innerText;
+      translations1[childs[0].innerText.replace(' ', '').toLowerCase()] = childs[1].innerText;
+      translations2[childs[1].innerText.replace(' ', '').toLowerCase()] = childs[0].innerText;
     }
 
     if (confirm('OK to play, cancel to Level Up')) {
