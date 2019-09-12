@@ -1,20 +1,9 @@
 function getAnswer() {
   try {
-    if (lastWorker) lastWorker.terminate();
-    var blob = new Blob([`
-importScripts('https://jeffnjellybean.github.io/schoolhax/code/gocr.js')
-onmessage = function(e){
-var result = GOCR(e.data);
-postMessage(result);
-}
-    `]);
-
-    var blobURL = window.URL.createObjectURL(blob);
-
-    worker = new Worker(blobURL);
-
-    worker.onmessage = function(e) {
-      var result = e.data;
+    if(worker == undefined) {
+      worker = new Tesseract.TesseractWorker();
+    }
+    worker.recognize($('#word_canvas')[0].toDataURL('image/png'), 'eng').then(function(result) {
       alert(result);
 
       var text = result;
@@ -32,12 +21,8 @@ postMessage(result);
       event.which = 13;
       $('.guess').trigger(event);
 
-      worker.terminate();
       setTimeout(getAnswer, 1000);
-    }
-
-    worker.postMessage($('#word_canvas')[0].toDataURL('image/png'));
-    lastWorker = worker;
+    });
   } catch (e) {
     alert(e.message);
   }
@@ -57,8 +42,11 @@ function answerQuestion() {
 }
 try {
   if (window.location.href.indexOf('game/user_list') !== -1) {
-
     var ele = document.createElement('script');
+    ele.src = 'https://unpkg.com/tesseract.js@v2.0.0-alpha.13/dist/tesseract.min.js';
+    document.body.appendChild(ele);
+
+    ele = document.createElement('script');
     ele.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
     document.body.appendChild(ele);
 
@@ -78,7 +66,7 @@ try {
       $('.level_up_btn').click();
     }
 
-    var worker, lastWorker;
+    var worker;
 
     var interval = setInterval(function() {
       if ($('.delay').text() === '1') {
