@@ -15,7 +15,7 @@ onmessage = function(e){
       var result = e.data;
     };
   }
-  worker.postMessage($('#word_canvas')[0]);
+  worker.postMessage(document.querySelector('#word_canvas'));
   console.log(result);
 
   var text = result;
