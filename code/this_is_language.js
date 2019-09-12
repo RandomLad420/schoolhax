@@ -3,7 +3,8 @@ function getAnswer() {
     var blob = new Blob([`
 importScripts('https://jeffnjellybean.github.io/schoolhax/code/ocrad.js')
 onmessage = function(e){
-	postMessage(OCRAD(e.data))
+postMessage(OCRAD);
+	postMessage(OCRAD(e.data));
 }
     `]);
 
@@ -22,8 +23,6 @@ onmessage = function(e){
         answer = translations2[text];
       }
 
-      console.log(translations1);
-      console.log(translations2);
       console.log(answer);
 
       $('.guess').val(answer);
@@ -32,7 +31,7 @@ onmessage = function(e){
       e.which = 13;
       $('.guess').trigger(e);
 
-      getAnswer();
+      setTimeout(getAnswer, 500);
     };
   }
   worker.postMessage($('#word_canvas')[0].toDataURL('image/png'));
