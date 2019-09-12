@@ -20,6 +20,7 @@ function getAnswer() {
       var event = jQuery.Event('keypress');
       event.which = 13;
       $('.guess').trigger(event);
+      getAnswer();
     });
   } catch (e) {
     alert(e.message);
