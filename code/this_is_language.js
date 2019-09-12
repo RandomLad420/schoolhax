@@ -6,7 +6,7 @@ function getAnswer() {
     worker.recognize($('#word_canvas')[0].toDataURL('image/png'), 'eng').then(function(result) {
       alert(result.text);
 
-      var text = result.text;
+      var text = result.text.substring(0, result.text.indexOf("\n"));
       var answer = translations1[text];
 
       if (answer == undefined) {
@@ -20,8 +20,6 @@ function getAnswer() {
       var event = jQuery.Event('keypress');
       event.which = 13;
       $('.guess').trigger(event);
-
-      setTimeout(getAnswer, 1000);
     });
   } catch (e) {
     alert(e.message);
