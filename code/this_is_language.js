@@ -3,11 +3,12 @@ function getAnswer() {
     if(worker == undefined) {
       worker = new Tesseract.TesseractWorker();
     }
+    
     worker.recognize($('#word_canvas')[0].toDataURL('image/png'), 'eng', {
-      'tessedit_ocr_engine_mode': OEM.TESSERACT_ONLY,
+      'tessedit_ocr_engine_mode': Tesseract.OEM.TESSERACT_ONLY,
       'tessedit_char_whitelist': 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',
     }).then(function(result) {
-      alert(result.text);
+      console.log(result);
 
       var text = result.text.substring(0, result.text.indexOf("\n"));
       var answer = translations1[text];
@@ -15,14 +16,16 @@ function getAnswer() {
       if (answer == undefined) {
         answer = translations2[text];
       }
-
-      alert(answer);
+      
+      console.log(answer);
 
       $('.guess').val(answer);
 
       var event = jQuery.Event('keypress');
       event.which = 13;
       $('.guess').trigger(event);
+      
+      getAnswer();
     });
   } catch (e) {
     alert(e.message);
