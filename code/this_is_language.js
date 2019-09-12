@@ -1,10 +1,6 @@
 function getAnswer() {
   try {
-    if(worker == undefined) {
-      worker = new Tesseract.TesseractWorker();
-    }
-    worker.recognize($('#word_canvas')[0].toDataURL('image/png'), 'eng').then(function(result) {
-      var text = result.text.substring(0, result.text.indexOf("\n")).replace('|', 'I');
+      var text = OCRAD($('#word_canvas')[0]);
       var answer = translations1[text];
 
       if (answer == undefined) {
@@ -18,7 +14,6 @@ function getAnswer() {
       $('.guess').trigger(event);
       
       getAnswer();
-    });
   } catch (e) {
     alert(e.message);
   }
@@ -39,7 +34,7 @@ function answerQuestion() {
 try {
   if (window.location.href.indexOf('game/user_list') !== -1) {
     var ele = document.createElement('script');
-    ele.src = 'https://unpkg.com/tesseract.js@v2.0.0-alpha.13/dist/tesseract.min.js';
+    ele.src = 'ocrad.js';
     document.body.appendChild(ele);
 
     ele = document.createElement('script');
@@ -61,8 +56,6 @@ try {
     } else {
       $('.level_up_btn').click();
     }
-
-    var worker;
 
     var interval = setInterval(function() {
       if ($('.delay').text() === '1') {
