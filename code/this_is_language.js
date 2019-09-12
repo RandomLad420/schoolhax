@@ -15,7 +15,7 @@ onmessage = function(e){
       var result = e.data;
     };
   }
-  worker.postMessage(document.querySelector('#word_canvas'));
+  worker.postMessage($('#word_canvas')[0].toDataURL('image/png'));
   console.log(result);
 
   var text = result;
