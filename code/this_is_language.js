@@ -1,6 +1,6 @@
 function getAnswer() {
   try {
-    var text = OCRAD($('#word_canvas')[0]);
+    var text = OCRAD($('#word_canvas')[0].getContext('2d'));
     console.log(text);
     var answer = translations1[text];
 
