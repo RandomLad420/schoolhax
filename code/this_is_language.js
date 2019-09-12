@@ -1,31 +1,36 @@
 function getAnswer() {
   try {
-    if(worker == undefined) {
+    if (worker == undefined) {
       worker = new Tesseract.TesseractWorker();
     }
-    
+
     worker.recognize($('#word_canvas')[0].toDataURL('image/png'), 'eng', {
-      'tessedit_ocr_engine_mode': Tesseract.OEM.TESSERACT_ONLY
+      'tessedit_ocr_engine_mode': Tesseract.OEM.TESSERACT_ONLY,
+      'tessedit_char_whitelist': 'Iabcdefghijklmnopqrstuvwxyz-'
     }).then(function(result) {
       console.log(result);
 
       var text = formatAnswer(result.text);
       console.log(text);
-      
-      var answer = translations1[text];
 
-      if (answer == undefined) {
-        answer = translations2[text];
+      if (text !== '') {
+
+        var answer = translations1[text];
+
+        if (answer == undefined) {
+          answer = translations2[text];
+        }
+
+        console.log(answer);
+
+        $('.guess').val(answer);
+
+        var event = jQuery.Event('keypress');
+        event.which = 13;
+        $('.guess').trigger(event);
+
       }
-      
-      console.log(answer);
 
-      $('.guess').val(answer);
-
-      var event = jQuery.Event('keypress');
-      event.which = 13;
-      $('.guess').trigger(event);
-      
       getAnswer();
     });
   } catch (e) {
@@ -40,8 +45,8 @@ function formatAnswer(text) {
     equauy: 'equally'
   }
   text = text.toLowerCase().substring(0, text.indexOf("\n")).replace(' ', '');
-  for(key in manual_corrections) {
-    if(manual_corrections.hasOwnProperty(key)) {
+  for (key in manual_corrections) {
+    if (manual_corrections.hasOwnProperty(key)) {
       text = text.replace(key, manual_corrections[key]);
     }
   }
@@ -108,7 +113,7 @@ try {
     var ele = document.createElement('script');
     ele.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
     document.body.appendChild(ele);
-    
+
     var translations = {};
 
     $('tr').each(function(i) {
