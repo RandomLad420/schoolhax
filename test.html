@@ -14,7 +14,7 @@
       try {
         $('button').click(function() {
           var image = new Image();
-          image.src = $('input')[0].files[0];
+          image.src = $('input').val();
           var canvas = $('canvas')[0];
           canvas.width = image.naturalWidth;
           canvas.height = image.naturalHeight;
