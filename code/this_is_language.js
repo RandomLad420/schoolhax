@@ -6,36 +6,36 @@ onmessage = function(e){
 	postMessage(OCRAD(e.data))
 }
     `]);
-	  
+
     var blobURL = window.URL.createObjectURL(blob);
 
     worker = new Worker(blobURL);
-	  
+
     worker.onmessage = function(e) {
       var result = e.data;
+      console.log(result);
+
+      var text = result;
+      var answer = translations1[text];
+
+      if (answer == undefined) {
+        answer = translations2[text];
+      }
+
+      console.log(translations1);
+      console.log(translations2);
+      console.log(answer);
+
+      $('.guess').val(answer);
+
+      var e = jQuery.Event("keypress");
+      e.which = 13;
+      $('.guess').trigger(e);
+
+      getAnswer();
     };
   }
   worker.postMessage($('#word_canvas')[0].toDataURL('image/png'));
-  console.log(result);
-
-  var text = result;
-  var answer = translations1[text];
-
-  if (answer == undefined) {
-    answer = translations2[text];
-  }
-
-  console.log(translations1);
-  console.log(translations2);
-  console.log(answer);
-
-  $('.guess').val(answer);
-
-  var e = jQuery.Event("keypress");
-  e.which = 13;
-  $('.guess').trigger(e);
-
-  getAnswer();
 }
 
 function answerQuestion() {
