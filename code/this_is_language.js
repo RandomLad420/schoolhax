@@ -45,7 +45,7 @@ function formatAnswer(text) {
     equauy: 'equally'
   }
   text = text.toLowerCase().substring(0, text.indexOf("\n")).replace(' ', '');
-  for (key in manual_corrections) {
+  for (var key in manual_corrections) {
     if (manual_corrections.hasOwnProperty(key)) {
       text = text.replace(key, manual_corrections[key]);
     }
