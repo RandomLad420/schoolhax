@@ -10,7 +10,7 @@ function getAnswer() {
     }).then(function(result) {
       console.log(result);
 
-      var text = result.text.substring(0, result.text.indexOf("\n"));
+      var text = result.text.toLowerCase().substring(0, result.text.indexOf("\n"));
       var answer = translations1[text];
 
       if (answer == undefined) {
@@ -60,8 +60,8 @@ try {
 
     for (var i = 0; i < tables.length; i++) {
       var childs = tables[i].children;
-      translations1[childs[0].innerText] = childs[1].innerText;
-      translations2[childs[1].innerText] = childs[0].innerText;
+      translations1[childs[0].innerText.replace(' ', '')] = childs[1].innerText;
+      translations2[childs[1].innerText.replace(' ', '')] = childs[0].innerText;
     }
 
     if (confirm('OK to play, cancel to Level Up')) {
