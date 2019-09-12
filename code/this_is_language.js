@@ -1,6 +1,6 @@
 function getAnswer() {
   if(worker == undefined) {
-    worker = new Worker('ocrad_worker.js');
+    worker = new Worker('./ocrad_worker.js');
     worker.onmessage = function(e) {
       var result = e.data;
     }
