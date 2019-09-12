@@ -5,8 +5,7 @@ function getAnswer() {
     }
     
     worker.recognize($('#word_canvas')[0].toDataURL('image/png'), 'eng', {
-      'tessedit_ocr_engine_mode': Tesseract.OEM.TESSERACT_ONLY,
-      'tessedit_char_whitelist': 'Iabcdefghijklmnopqrstuvwxyz-',
+      'tessedit_ocr_engine_mode': Tesseract.OEM.TESSERACT_ONLY
     }).then(function(result) {
       console.log(result);
 
