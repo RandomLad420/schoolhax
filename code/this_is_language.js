@@ -1,20 +1,26 @@
 function getAnswer() {
   try {
-    var text = OCRAD($('#word_canvas')[0].getContext('2d'));
-    console.log(text);
-    var answer = translations1[text];
-
-    if (answer == undefined) {
-      answer = translations2[text];
+    if(worker == undefined) {
+      worker = new Tesseract.TesseractWorker();
     }
-    console.log(answer);
-    $('.guess').val(answer);
+    worker.recognize($('#word_canvas')[0].toDataURL('image/png'), 'eng').then(function(result) {
+      alert(result.text);
 
-    var event = jQuery.Event('keypress');
-    event.which = 13;
-    $('.guess').trigger(event);
+      var text = result.text.substring(0, result.text.indexOf("\n"));
+      var answer = translations1[text];
 
-    setTimeout(getAnswer, 1000);
+      if (answer == undefined) {
+        answer = translations2[text];
+      }
+
+      alert(answer);
+
+      $('.guess').val(answer);
+
+      var event = jQuery.Event('keypress');
+      event.which = 13;
+      $('.guess').trigger(event);
+    });
   } catch (e) {
     alert(e.message);
   }
@@ -35,7 +41,7 @@ function answerQuestion() {
 try {
   if (window.location.href.indexOf('game/user_list') !== -1) {
     var ele = document.createElement('script');
-    ele.src = 'https://jeffnjellybean.github.io/schoolhax/code/ocrad.js';
+    ele.src = 'https://unpkg.com/tesseract.js@v2.0.0-alpha.13/dist/tesseract.min.js';
     document.body.appendChild(ele);
 
     ele = document.createElement('script');
@@ -57,6 +63,8 @@ try {
     } else {
       $('.level_up_btn').click();
     }
+
+    var worker;
 
     var interval = setInterval(function() {
       if ($('.delay').text() === '1') {
