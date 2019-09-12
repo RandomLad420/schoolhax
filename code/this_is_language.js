@@ -10,7 +10,7 @@ function getAnswer() {
     }).then(function(result) {
       console.log(result);
 
-      var text = result.text.toLowerCase().substring(0, result.text.indexOf("\n")).replace(' ', '').replace('ifs', 'it\'s').replace('excned', 'excited');
+      var text = formatAnswer(result.text);
       console.log(text);
       
       var answer = translations1[text];
@@ -34,6 +34,21 @@ function getAnswer() {
   }
 }
 
+function formatAnswer(text) {
+  var manual_corrections = {
+    ifs: 'it\'s',
+    excned: 'excited',
+    equauy: 'equally'
+  }
+  text.toLowerCase().substring(0, result.text.indexOf("\n")).replace(' ', '').trim();
+  for(key in manual_corrections) {
+    if(manual_corrections.hasOwnProperty(key)) {
+      text.replace(key, manual_corrections[key]);
+    }
+  }
+  return text;
+}
+
 function answerQuestion() {
   var type = $('.gender').text();
   var answer = translations[type];
@@ -46,6 +61,15 @@ function answerQuestion() {
 
   setTimeout(answerQuestion, 250);
 }
+
+function formatStorage(text) {
+  return text.replace(' ', '').toLowerCase().trim();
+}
+
+function formatType(text) {
+  return text.replace('masculine', 'm').replace('feminine', 'f').replace('singular', '(s)').replace('plural', '(pl)').trim();
+}
+
 try {
   if (window.location.href.indexOf('game/user_list') !== -1) {
     var ele = document.createElement('script');
@@ -62,8 +86,8 @@ try {
 
     for (var i = 0; i < tables.length; i++) {
       var childs = tables[i].children;
-      translations1[childs[0].innerText.replace(' ', '').toLowerCase()] = childs[1].innerText;
-      translations2[childs[1].innerText.replace(' ', '').toLowerCase()] = childs[0].innerText;
+      translations1[formatStorage(childs[0].innerText)] = childs[1].innerText;
+      translations2[formatStorage(childs[1].innerText)] = childs[0].innerText;
     }
 
     if (confirm('OK to play, cancel to Level Up')) {
@@ -82,15 +106,15 @@ try {
     }, 500);
 
   } else if (window.location.href.indexOf('/grammar') !== -1) {
-
     var ele = document.createElement('script');
     ele.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
     document.body.appendChild(ele);
+    
     var translations = {};
 
     $('tr').each(function(i) {
       var childs = $(this).children();
-      var type = childs.first().text().replace('masculine', 'm').replace('feminine', 'f').replace('singular', '(s)').replace('plural', '(pl)').trim();
+      var type = formatType(childs.first().text());
       translations[type] = childs.eq(1).text().trim();
     });
 
