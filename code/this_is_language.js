@@ -1,9 +1,20 @@
 function getAnswer() {
-  if(worker == undefined) {
-    worker = new Worker('https://jeffnjellybean.github.io/schoolhax/code/ocrad_worker.js');
+  if (worker == undefined) {
+    var blob = new Blob([`
+importScripts('ocrad.js')
+onmessage = function(e){
+	postMessage(OCRAD(e.data))
+}
+    `]);
+
+    // Obtain a blob URL reference to our worker 'file'.
+    var blobURL = window.URL.createObjectURL(blob);
+
+    var worker = new Worker(blobURL);
     worker.onmessage = function(e) {
-      var result = e.data;
-    }
+      // e.data == 'msg from worker'
+    };
+    worker.postMessage(); // Start the worker.
   }
   worker.postMessage($('#word_canvas')[0]);
   console.log(result);
@@ -68,7 +79,7 @@ try {
     }
 
     var worker;
-    
+
     var interval = setInterval(function() {
       if ($('.delay').text() === '1') {
         clearTimeout(interval);
