@@ -7,13 +7,14 @@
     <input type="file">
     <button>enter</button>
     <span></span>
+    <canvas></canvas>
     <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
     <script src="code/ocrad.js"></script>
     <script>
       try {
         $('button').click(function() {
           var image = $('input')[0].files[0];
-          var canvas = document.createElement('canvas');
+          var canvas = $('canvas')[0];
           canvas.width = image.naturalWidth;
           canvas.height = image.naturalHeight;
           var context = canvas.getContext('2d');
