@@ -19,7 +19,7 @@ document.write(`
     <p id="answer"></p>
     <form>
       <div class="form-group">
-        <label for="email">Question:</label>
+        <label for="question">Question:</label>
         <input type="text" class="form-control" id="question">
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
