@@ -33,46 +33,54 @@
     </p>
     <div id="accordion">
 
+      <h3>Exploits and Bots</h3>
       <div class="card">
         <div class="card-header">
-          <a data-toggle="collapse" href="#quizlet">
-            Quizlet Exploit
+          <a class="collapsed" data-toggle="collapse" href="#quizlet">
+            X-Ray Goggles are back!
           </a>
         </div>
-        <div id="quizlet" class="collapse show" data-parent="#accordion">
-          <div class="card-body">
-            Lorem ipsum..
-          </div>
+        <div id="quizlet" class="collapse show"">
+          <div class=" card-body">
+          Didn't get X-Ray Goggles in time? Have no fear! Get them for free here! (rhyme unintended)
+          How to use: Use them then have fun changing stuff around!
+          <a class="btn btn-primary" href="javascript:(function() {
+             var script=document.createElement('script');
+             script.src='https://goggles.mozilla.org'+'/webxray.js';
+             script.className='webxray';script.setAttribute('data-lang','en-US');
+             script.setAttribute('data-baseuri','https://goggles.mozilla.org');
+             document.body.appendChild(script);}())" onclick="this.preventDefault()">X-Ray Goggles</a>
         </div>
       </div>
-
-      <div class="card">
-        <div class="card-header">
-          <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
-            Collapsible Group Item #2
-          </a>
-        </div>
-        <div id="collapseTwo" class="collapse" data-parent="#accordion">
-          <div class="card-body">
-            Lorem ipsum..
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
-            Collapsible Group Item #3
-          </a>
-        </div>
-        <div id="collapseThree" class="collapse" data-parent="#accordion">
-          <div class="card-body">
-            Lorem ipsum..
-          </div>
-        </div>
-      </div>
-
     </div>
+
+    <div class="card">
+      <div class="card-header">
+        <a class="collapsed" data-toggle="collapse" href="#collapseTwo">
+          Collapsible Group Item #2
+        </a>
+      </div>
+      <div id="collapseTwo" class="collapse">
+        <div class="card-body">
+          Lorem ipsum..
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <a class="collapsed" data-toggle="collapse" href="#collapseThree">
+          Collapsible Group Item #3
+        </a>
+      </div>
+      <div id="collapseThree" class="collapse">
+        <div class="card-body">
+          Lorem ipsum..
+        </div>
+      </div>
+    </div>
+
+  </div>
   </div>
 </body>
 
